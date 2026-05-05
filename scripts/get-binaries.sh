@@ -113,11 +113,12 @@ check_and_download "AltServer" "$altserver_url" ".tag_name" "https://github.com/
 
 # Check and download netmuxd
 if [ -n "$OVERRIDE_NETMUXD_ARCH" ]; then
-    NETMUXD_PKG_ARCH="${OVERRIDE_NETMUXD_ARCH}-linux-netmuxd"
+    NETMUXD_PKG_ARCH="${OVERRIDE_NETMUXD_ARCH}-unknown-linux-gnu"
 else
-    NETMUXD_PKG_ARCH="${ARCH}-linux-netmuxd"
+    NETMUXD_PKG_ARCH="${ARCH}-unknown-linux-gnu"
 fi
-check_and_download "netmuxd" "$netmuxd_url" ".tag_name" "https://github.com/jkcoxson/netmuxd/releases/download/%s/${NETMUXD_PKG_ARCH}" "/altserver/bin/netmuxd"
+check_and_download "netmuxd" "$netmuxd_url" ".tag_name" "https://github.com/jkcoxson/netmuxd/releases/download/%s/netmuxd-${NETMUXD_PKG_ARCH}.tar.gz" "/altserver/bin/netmuxd.tar.gz"
+tar -xf "/altserver/bin/netmuxd.tar.gz" -C "/altserver/bin"
 
 # Check and download anisette-server
 if [ -n "$OVERRIDE_ANISETTE_ARCH" ]; then
